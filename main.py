@@ -1,10 +1,9 @@
 from datetime import datetime
-from fastapi.exception_handlers import http_exception_handler
 from pydantic import BaseModel
 from typing import Optional
 
 import pytz
-from fastapi import FastAPI, Path
+from fastapi import FastAPI, Path, HTTPException
 
 app = FastAPI()
 
@@ -47,6 +46,9 @@ def convert_epoch_to_datetime(data: DateTimeRequest):
     if data.time_zone is None:
         timezone = pytz.timezone("Asia/Kolkata")
     else:
+        if data.time_zone not in pytz.all_timezones:
+            raise HTTPException(status_code=400, detail="Invalid Timezone")
+
         timezone = pytz.timezone(data.time_zone)
     epoch = data.epoch
     date_format = data.date_format
@@ -56,9 +58,7 @@ def convert_epoch_to_datetime(data: DateTimeRequest):
     strftime_format = format_mapping.get(date_format)
 
     if strftime_format is None:
-        raise http_exception_handler(
-            status_code=400, detail="Invalid date format"
-        )
+        raise HTTPException(status_code=400, detail="Invalid date format")
 
     formatted_datetime = datetime.fromtimestamp(epoch, tz=timezone).strftime(
         strftime_format
