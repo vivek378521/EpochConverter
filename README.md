@@ -1,4 +1,4 @@
-## Currently deployed at render on the free tier: 
+## Currently deployed at render on the free tier: (ONLY returns output respective to IST, timezone=Asia/Kolkata)
 
 ```https://epoch-converter.onrender.com/docs#/```
 
@@ -53,6 +53,7 @@ POST /convert_epoch_to_datetime/
 {
   "epoch": 1636136665,
   "date_format": "dd/mm/yyyy"
+  "time_zone": "America/New_York" # Optional, defaults to Asia/Kolkata
 }
 ```
 
@@ -68,5 +69,6 @@ POST /convert_epoch_to_datetime/
 
 - Send a POST request to the `/convert_epoch_to_datetime/` endpoint with the epoch timestamp and desired date format in the request body.
 - The response includes the formatted date and time.
-
+- If you want specific time_zone then add the time_zone field otherwise it defaults to Asia/Kolkata
+[Time zones](https://gist.github.com/heyalexej/8bf688fd67d7199be4a1682b3eec7568)
 Feel free to explore and use these APIs for your timestamp conversion and date formatting needs. If you have any questions or encounter issues, please refer to the API documentation (<host>/docs) for further details.
