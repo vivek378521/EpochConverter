@@ -26,6 +26,11 @@ epoch_param = Path(..., description="Epoch timestamp")
 date_format_param = Path(..., description="Desired date and time format")
 
 
+@app.get("/")
+def hello_world():
+    return {"message": "It is working"}
+
+
 @app.get("/date_formats/")
 def get_date_formats():
     return format_mapping
