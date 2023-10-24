@@ -49,3 +49,60 @@ def test_convert_epoch_to_datetime():
 
     assert formatted_date == expected_formatted_date
     assert formatted_time == expected_formatted_time
+
+
+def test_convert_epoch_to_datetime_with_optional_time_zone():
+    # Define the request data with optional time_zone
+    request_data = {
+        "epoch": 1636136665,
+        "date_format": "dd/mm/yyyy",
+        "time_zone": "Asia/Kolkata",  # Provide a time zone (optional)
+    }
+
+    response = client.post("/convert_epoch_to_datetime/", json=request_data)
+    assert response.status_code == 200  # Assuming a successful response
+
+    data = response.json()
+    assert "formatted_date" in data
+    assert "time" in data
+
+    # Add more specific assertions to validate the content of the response data as needed
+
+
+def test_convert_epoch_to_datetime_without_time_zone():
+    # Define the request data without the time_zone (optional)
+    request_data = {"epoch": 1636136665, "date_format": "dd/mm/yyyy"}
+
+    response = client.post("/convert_epoch_to_datetime/", json=request_data)
+    assert response.status_code == 200  # Assuming a successful response
+
+    data = response.json()
+    assert "formatted_date" in data
+    assert "time" in data
+
+
+def test_convert_epoch_to_datetime_with_custom_time_zone():
+    # Define the request data with a custom time_zone
+    request_data = {
+        "epoch": 1636136665,
+        "date_format": "dd/mm/yyyy",
+        "time_zone": "America/New_York",  # Provide a different time zone
+    }
+
+    response = client.post("/convert_epoch_to_datetime/", json=request_data)
+    assert response.status_code == 200  # Assuming a successful response
+
+    data = response.json()
+    print(data)
+    assert "formatted_date" in data
+    assert "time" in data
+
+    # Add specific assertions to validate the content of the response data
+    assert "formatted_date" in data
+    assert "time" in data
+    assert (
+        data["formatted_date"] == "05/11/2021"
+    )  # Replace with the expected formatted date for "America/New_York"
+    assert (
+        data["time"] == "14:24:25"
+    )  # Replace with the expected time for "America/New_York"
