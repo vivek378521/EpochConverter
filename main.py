@@ -67,3 +67,9 @@ def convert_epoch_to_datetime(data: DateTimeRequest):
         time_format
     )
     return {"formatted_date": formatted_datetime, "time": formatted_time}
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(app, host="0.0.0.0", port=8000)
