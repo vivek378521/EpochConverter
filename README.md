@@ -1,12 +1,12 @@
-## Currently deployed at render on the free tier: (ONLY returns output respective to IST, timezone=Asia/Kolkata)
+## Currently deployed at vercel on the free tier: 
 
-```https://epoch-converter.onrender.com/docs#/```
+```https://epoch-converter-vivek378521.vercel.app/docs```
 
 
 ### Live APIs
-POST - ```https://epoch-converter.onrender.com/convert_epoch_to_datetime/```
+POST - ```https://epoch-converter-vivek378521.vercel.app/convert_epoch_to_datetime/```
 
-GET - ```https://epoch-converter.onrender.com/date_formats/```
+GET - ```https://epoch-converter-vivek378521.vercel.app/date_formats/```
 
 # FastAPI Epoch Conversion API
 
